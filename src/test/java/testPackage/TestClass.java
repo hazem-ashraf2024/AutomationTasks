@@ -1,4 +1,33 @@
 package testPackage;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+
 public class TestClass {
+    WebDriver driver;
+    /**
+     * #1
+     * ________________ Basic ________________
+     * Open Google Chrome
+     * Navigate to [<a href="https://duckduckgo.com/">...</a>]
+     * Assert that the page title is [Google]
+     * Close Google Chrome
+     */
+    @Test
+    public void task1(){
+        driver=new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://duckduckgo.com/");
+       String actualPageTitle= driver.getTitle();
+       String expectedPageTitle="Google";
+        Assert.assertEquals(actualPageTitle,expectedPageTitle,"actual title '%s' not like expected title '%s'".formatted(actualPageTitle,expectedPageTitle));
+
+    }
+    @AfterMethod
+    public void tearDown(){
+        driver.quit();
+    }
 }
