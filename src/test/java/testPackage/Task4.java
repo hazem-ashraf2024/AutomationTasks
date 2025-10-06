@@ -26,7 +26,7 @@ public class Task4 {
         driver.get("https://duckduckgo.com/");
         By searchBoxLocator=By.xpath("//input[@aria-label='Search with DuckDuckGo']");
         driver.findElement(searchBoxLocator).sendKeys("TestNG"+ Keys.ENTER);
-        By fourthResultTextLocator=By.xpath("//span[text()='TestNG Tutorial | Selenium with TestNG | TestNg for Beginners - Tools QA']");
+        By fourthResultTextLocator=By.xpath("(//li[@data-layout='organic'])[4]//a[@data-testid='result-title-a']");
         String actualText=driver.findElement(fourthResultTextLocator).getText();
         String expectedText="TestNG Tutorial";
         Assert.assertEquals(actualText,expectedText,"Fourth result text is not matching");

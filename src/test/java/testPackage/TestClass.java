@@ -9,6 +9,9 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
+
 public class TestClass {
     WebDriver driver;
 
@@ -60,7 +63,7 @@ public class TestClass {
 //        // @FindBy annotation is used in Page Factory Model to locate elements it takes By object as parameter and stores the element in a WebElement variable
 //        // but not recommended to use in test class by titus fortune (head of tech committee  and simon snick the founder of selenium in the video
 
-        Assert.assertTrue(isDisplayed,"DuckDuckGo logo is not displayed");
+        assertTrue(isDisplayed,"DuckDuckGo logo is not displayed");
 
         // we go with option #1 based on selenium docs regarding troubleshooting: always relocate the element every time  when you take action
 
@@ -85,10 +88,31 @@ public class TestClass {
 //        driver.findElement(searchBoxLocator).sendKeys(Keys.ENTER);
         By searchButtonLocator=By.xpath("search_button_homepage");
       //  driver.findElement(searchButtonLocator).click();
-        By firstResultLinkLocator=By.xpath("//span[text()='WebDriver - Selenium']/parent::a");
-        String actualLink = driver.findElement(firstResultLinkLocator).getAttribute("href");
+        By firstResultLinkLocator=By.xpath("(//li[@data-layout='organic'])[1]//a[@data-testid='result-title-a']");
+        String actualLink = driver.findElement(firstResultLinkLocator).getDomAttribute("href");
         String expectedLink="https://www.selenium.dev/documentation/webdriver/";
         Assert.assertEquals(actualLink,expectedLink,"First result link is not matching");
+    }
+
+    /**
+     * #5
+     * ________________ Moderate ________________
+     * Open Google Chrome
+     * Navigate to [<a href="https://duckduckgo.com/">...</a>]
+     * Search for [Cucumber IO]
+     * Assert that the link of the second result contains [<a href="https://www.linkedin.com">...</a>]
+     * Close Google Chrome
+     */
+    @Test
+    public void task5(){
+        driver.manage().window().maximize();
+        driver.get("https://duckduckgo.com/");
+        By searchBoxLocator=By.xpath("//input[@aria-label='Search with DuckDuckGo']");
+        driver.findElement(searchBoxLocator).sendKeys("Cucumber IO"+ Keys.ENTER);
+        By secondResultLinkLocator=By.xpath("(//li[@data-layout='organic'])[2]//a[@data-testid='result-title-a']");
+        String actualLink=driver.findElement(secondResultLinkLocator).getDomAttribute("href");
+        String expectedLink="https://www.linkedin.com";
+        Assert.assertTrue(actualLink.contains(expectedLink),"Actual link "+actualLink+" does not contain "+expectedLink);
     }
     @BeforeMethod
     public void setUp(){
