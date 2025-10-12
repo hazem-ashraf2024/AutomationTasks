@@ -114,6 +114,24 @@ public class TestClass {
         String expectedLink="https://www.linkedin.com";
         Assert.assertTrue(actualLink.contains(expectedLink),"Actual link "+actualLink+" does not contain "+expectedLink);
     }
+
+    /**
+     * #6
+     * ________________ Basic ________________
+     * Open Google Chrome
+     * Navigate to [<a href="http://the-internet.herokuapp.com/checkboxes">...</a>]
+     * Check Checkbox 1
+     * Assert that both Checkboxes are checked
+     * Close Google Chrome
+     */
+    @Test //(dependsOnMethods = {"task1","task2","task3","task5"})
+    public void task6() {
+        driver.manage().window().maximize();
+        driver.get("http://the-internet.herokuapp.com/checkboxes");
+        By checkbox1Locator = By.xpath("(//input[@type='checkbox'])[1]");
+        driver.findElement(checkbox1Locator).click();
+        Assert.assertTrue(driver.findElement(checkbox1Locator).isSelected(), "Checkbox 1 is not selected");
+    }
     @BeforeMethod
     public void setUp(){
         driver=new ChromeDriver();
