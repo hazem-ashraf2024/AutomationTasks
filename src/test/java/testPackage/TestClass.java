@@ -86,7 +86,7 @@ public class TestClass {
         driver.findElement(searchBoxLocator).sendKeys("Selenium WebDriver"+Keys.ENTER);
 //        or
 //        driver.findElement(searchBoxLocator).sendKeys(Keys.ENTER);
-        By searchButtonLocator=By.xpath("search_button_homepage");
+       // By searchButtonLocator=By.xpath("search_button_homepage");
       //  driver.findElement(searchButtonLocator).click();
         By firstResultLinkLocator=By.xpath("(//li[@data-layout='organic'])[1]//a[@data-testid='result-title-a']");
         String actualLink = driver.findElement(firstResultLinkLocator).getDomAttribute("href");
