@@ -93,4 +93,31 @@ element.getAttribute(""); generic search in dom attribute if not search in dom p
 5. throw many exceptions
 
 element.sendKeys("Selenium", " ", "WebDriver");
-element.clear();
+
+# element.clear();
+1. لو الelement مش موجود في فورم يبقي معرفكش 
+2. لو ال element موجود جوه form هت reset ال value بتاعته للoriginal value في ال dom property يعني مش بتمسح
+
+# element.sendKeys();
+1. ال input بتاعها اجه اسمها character sequence و ده parent for strings and other classes
+2. في ال three dot بتاعه ال otptional يعني ممكن تبعت او متبعتش
+3. ممكن تبعت كذا string مفصولين ب coma 
+4. ممكن تكتب strings و بعدها ت send key enter or tab 
+5. انت مش بتسخدمها عشان تset value ل input  او عشان ت type في elemnet و لكن هو بيsimulate عمليه الكتابه و may set its value 
+6. settings values depend on dev design lang عشان كده كاتبين may يعني ممكن و كممكن 
+ex: element.sendKeys("username", Keys.TAB, "password", Keys.TAB, Keys.ENTER, Keys.TAB, Keys.ENTER);
+
+# implicit waits
+1. syntax : driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+2. handle only one exception type : NoSuchElementException
+3. ولو لقي الelement بيفضل مستني ال 10 ثوانيس كاملين 
+4. مش بيهندل ال lazy loading
+
+# explicit waits
+1. syntax : WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+   wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(""));
+2. فيها مشكله انك لازم تبقي عارف اسامي الexceptions  
+3. لو دخلت جوهvisibilityOfElementLocated هتلاقيها بترجع elementIsVisible و لو جاله noSuchElement و staleElementReference مش بيهندله
+4. لكن في الdocs  بتهندل ال not Found Exception 
+5. element is visible >> بتستخدم isDisplayed() جواها 
+6. بيدور كل نص ثانيه 

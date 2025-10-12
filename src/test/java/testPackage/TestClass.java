@@ -82,7 +82,7 @@ public class TestClass {
     public void task3(){
         driver.manage().window().maximize();
         driver.get("https://duckduckgo.com/");
-        By searchBoxLocator=By.xpath("//input[@aria-label='Search with DuckDuckGo']");
+        By searchBoxLocator=By.xpath("//input[@id='searchbox_input']");
         driver.findElement(searchBoxLocator).sendKeys("Selenium WebDriver"+Keys.ENTER);
 //        or
 //        driver.findElement(searchBoxLocator).sendKeys(Keys.ENTER);
