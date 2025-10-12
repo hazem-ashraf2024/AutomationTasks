@@ -25,7 +25,7 @@ public class TestClass {
      * Close Google Chrome
      */
 
-    @Test
+    @Test()
     public void task1(){
 
         driver.manage().window().maximize();
@@ -44,7 +44,7 @@ public class TestClass {
      * Assert that the DuckDuckGo logo is displayed
      * Close Google Chrome
      */
-    @Test
+    @Test (dependsOnMethods = {"task1"})
     public void task2(){
         driver.manage().window().maximize();
         driver.get("https://duckduckgo.com/");
@@ -78,7 +78,7 @@ public class TestClass {
      * Assert that the link of the first result is [<a href="https://www.selenium.dev/documentation/webdriver/">...</a>]
      * Close Google Chrome
      */
-    @Test
+    @Test (dependsOnMethods = {"task1","task2"})
     public void task3(){
         driver.manage().window().maximize();
         driver.get("https://duckduckgo.com/");
@@ -103,7 +103,7 @@ public class TestClass {
      * Assert that the link of the second result contains [<a href="https://www.linkedin.com">...</a>]
      * Close Google Chrome
      */
-    @Test
+    @Test (dependsOnMethods = {"task1","task2","task3"})
     public void task5(){
         driver.manage().window().maximize();
         driver.get("https://duckduckgo.com/");
