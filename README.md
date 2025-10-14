@@ -91,12 +91,16 @@ element.getAttribute(""); generic search in dom attribute if not search in dom p
 3. يعني متخزنش في web element عشان كده احنا بنخزن في by object
 4. عشان تعمل click لازم يكون ال element يبقي visible,is dipayed=true و الhight,width اكبر من zero 
 5. throw many exceptions
+6. https://chatgpt.com/s/t_68ecba49d32481918353e87375267f63
+7. solution > we store element locator (By object ) not element reference (webElment) 
+8. and every time we use driver.findElement(locator) to re find element freshly 
 
 element.sendKeys("Selenium", " ", "WebDriver");
 
 # element.clear();
 1. لو الelement مش موجود في فورم يبقي معرفكش 
 2. لو ال element موجود جوه form هت reset ال value بتاعته للoriginal value في ال dom property يعني مش بتمسح
+3. https://chatgpt.com/s/t_68ecbc788a708191a5d6d344193d9a59
 
 # element.sendKeys();
 1. ال input بتاعها اجه اسمها character sequence و ده parent for strings and other classes

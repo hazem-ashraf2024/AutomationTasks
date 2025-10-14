@@ -1,8 +1,6 @@
 package testPackage;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -129,8 +127,31 @@ public class TestClass {
         driver.manage().window().maximize();
         driver.get("http://the-internet.herokuapp.com/checkboxes");
         By checkbox1Locator = By.xpath("(//input[@type='checkbox'])[1]");
+        By checkbox2Locator = By.xpath("(//input[@type='checkbox'])[2]");
         driver.findElement(checkbox1Locator).click();
-        Assert.assertTrue(driver.findElement(checkbox1Locator).isSelected(), "Checkbox 1 is not selected");
+        Assert.assertTrue(driver.findElement(checkbox1Locator).isSelected() &&
+                        driver.findElement(checkbox2Locator).isSelected(),
+                "Checkbox 1 is not selected");
+    }
+
+    /**
+     * #7
+     * ________________ Moderate ________________
+     * Open Google Chrome
+     * Navigate to [<a href="https://www.w3schools.com/html/html_tables.asp">...</a>]
+     * Assert that the Country for the Company [Ernst Handel] is [Austria]
+     * Close Google Chrome
+     */
+    @Test
+    public void task7(){
+        driver.manage().window().setPosition(new Point(0,0));
+        driver.manage().window().setSize(new Dimension(720,480));
+        driver.get("https://www.w3schools.com/html/html_tables.asp");
+        By countryLocator=By.xpath("//td[text()='Ernst Handel']/following-sibling::td[2]");
+        //advanced locator //tr[.//td[text()='Ernst Handel']]/td[2]
+        String actualCountry=driver.findElement(countryLocator).getText();
+        String expectedCountry="Austria";
+        Assert.assertEquals(actualCountry,expectedCountry,"Country is not matching");
     }
     @BeforeMethod
     public void setUp(){
