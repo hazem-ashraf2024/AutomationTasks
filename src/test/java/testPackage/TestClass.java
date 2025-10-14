@@ -3,6 +3,7 @@ package testPackage;
 import org.openqa.selenium.*;
 
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -174,6 +175,30 @@ public class TestClass {
         driver.findElement(uploadButtonLocator).click();
         By uploadedMessageLocator=By.xpath("//h3[text()='File Uploaded!']");
         Assert.assertTrue(driver.findElement(uploadedMessageLocator).isDisplayed(),"File is not uploaded");
+    }
+
+    /**
+     * #9
+     * ________________ Moderate ________________
+     * Open Google Chrome
+     * Navigate to [<a href="https://jqueryui.com/resources/demos/droppable/default.html">...</a>]
+     * Drag [Drag me to my target] and drop it on [Drop here]
+     * Assert that the text has been changed to [Dropped!]
+     * Close Google Chrome
+     */
+    @Test
+    public void task9() throws InterruptedException {
+        driver.manage().window().maximize();
+        driver.get("https://jqueryui.com/resources/demos/droppable/default.html");
+        By dragMeLocator=By.xpath("//div[@id='draggable']/p");
+        By dropHereLocator=By.xpath("//div[@id='droppable']/p");
+        //Using Action class to perform drag and drop
+        Actions actions=new Actions(driver);
+        actions.dragAndDrop(driver.findElement(dragMeLocator),
+                driver.findElement(dropHereLocator)).perform();
+        String actualTextAfterDrop=driver.findElement(dropHereLocator).getText();
+        String expectedTextAfterDrop="Dropped!";
+        Assert.assertEquals(actualTextAfterDrop,expectedTextAfterDrop,"Text after drop is not matching");
     }
     @BeforeMethod
     public void setUp(){
