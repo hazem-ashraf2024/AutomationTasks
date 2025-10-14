@@ -153,6 +153,28 @@ public class TestClass {
         String expectedCountry="Austria";
         Assert.assertEquals(actualCountry,expectedCountry,"Country is not matching");
     }
+
+    /**
+     * #8
+     * ________________ Moderate ________________
+     * Open Google Chrome
+     * Navigate to [<a href="http://the-internet.herokuapp.com/upload">...</a>]
+     * Upload a small image file
+     * Assert that the file was uploaded successfully
+     * Close Google Chrome
+     */
+    @Test
+    public void task8(){
+        driver.manage().window().maximize();
+        driver.get("http://the-internet.herokuapp.com/upload");
+        By chooseFileButtonLocator=By.id("file-upload");
+        String filePath=System.getProperty("user.dir")+"/src/test/resources/images/testImage.jpg";
+        driver.findElement(chooseFileButtonLocator).sendKeys(filePath);
+        By uploadButtonLocator=By.id("file-submit");
+        driver.findElement(uploadButtonLocator).click();
+        By uploadedMessageLocator=By.xpath("//h3[text()='File Uploaded!']");
+        Assert.assertTrue(driver.findElement(uploadedMessageLocator).isDisplayed(),"File is not uploaded");
+    }
     @BeforeMethod
     public void setUp(){
         driver=new ChromeDriver();
