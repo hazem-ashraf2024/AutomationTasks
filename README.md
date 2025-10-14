@@ -125,3 +125,19 @@ ex: element.sendKeys("username", Keys.TAB, "password", Keys.TAB, Keys.ENTER, Key
 4. لكن في الdocs  بتهندل ال not Found Exception 
 5. element is visible >> بتستخدم isDisplayed() جواها 
 6. بيدور كل نص ثانيه 
+/********************************************************/*********************/*******************/
+/********************************************************/
+waits defined at the top of class under driver definition 
+waits intaialized directly under driver initialization
+we have two option for explicit wait 
+
+option 1: one line wait then perform action
+wait.until(d-> d.findElement(locator).isDisplayed());
+driver.findElement(locator).click();
+
+
+option 2: lamda expression methods with curly braces with action diretly inside it
+wait.until(d-> {
+   driver.findElement(locator).click();
+   return true;
+});
